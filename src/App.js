@@ -1,4 +1,5 @@
-import "./App.css";
+
+import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import FactoryState from "./context/factories/FactoryState";
 
@@ -7,6 +8,7 @@ const App = () => {
     <div className="App">
       <FactoryState>
         <Navbar />
+        <Home />
       </FactoryState>
     </div>
   );
