@@ -19,7 +19,7 @@ const FactoryState = (props) => {
             },
         });
 
-        const jsonData = response.json();
+        const jsonData = await response.json();
         setFactories(jsonData);
         console.log(jsonData);
     }
@@ -33,7 +33,7 @@ const FactoryState = (props) => {
             },
         });
 
-        const jsonData = response.json();
+        const jsonData = await response.json();
         setProducts(jsonData);
         console.log(jsonData);
     }
@@ -54,14 +54,54 @@ const FactoryState = (props) => {
     }
 
     //Delete a product from a particular factory
-    
+    const deleteProduct = async (factoryId, id) => {
+        // will provide both the arguments from the trash icon. props.prodprop.factory, props.prodprop.id
+        const response = await fetch(`${host}/api/factories/${factoryId}/${id}`, {
+            method : 'DELETE',
+            headers : {
+                'Content-Type' : 'application/json',
+            },
+        });
+        const jsonData = await response.json();
+        console.log(jsonData);
+
+        //logic for client side.
+        const newProducts = products.filter((elemOfProd) => {return elemOfProd.id !== id})
+        setProducts(newProducts);
+    }
+
+    //Edit a product
+    const editProduct = async (id, factoryId, title, quantity) => {
+        // will provide all the arguments with passing the updateNote function which takes an instance of product
+        const response = await fetch(`${host}/api/factories/${factoryId}/${id}`, {
+            method : 'PUT',
+            headers : {
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify({factoryId, title, quantity})
+        });
+        const jsonData = await response.json();
+
+        //logic to edit on client side.
+        let newProducts = JSON.parse(JSON.stringify(products));
+        for (let index = 0; index < newProducts.length; index++) {
+            const element = newProducts[index];
+            if (element.id === id) {
+                newProducts[index].factory = factoryId;
+                newProducts[index].title = title;
+                newProducts[index].quantity = quantity;
+                break;
+            }
+        }
+        setProducts(newProducts);
+    }
 
 
 
   return (
-    <div>
-      
-    </div>
+    <factoryContext.Provider value={{factories, products, getFactories, getProducts, editProduct, deleteProduct, addProduct}}>
+        {props.children}
+    </factoryContext.Provider>
   )
 }
 
