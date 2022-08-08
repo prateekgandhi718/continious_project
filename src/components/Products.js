@@ -10,7 +10,7 @@ const Products = () => {
   const { products, getProducts, editProduct } = context;
 
   useEffect(() => {
-    getProducts(localStorage.getItem('currentFactory'))
+    getProducts(JSON.parse(localStorage.getItem('currentFactory')).id)
   }, []);
 
 
@@ -87,7 +87,7 @@ const Products = () => {
 
       <div className="mx-3">
         <div className="row my-3">
-          <h2>List of products in the selected factory</h2>
+          <h2>List of products in factory: {JSON.parse(localStorage.getItem('currentFactory')).factory_name}, {JSON.parse(localStorage.getItem('currentFactory')).factory_location}</h2>
           <div className="container">
             {products.length === 0 &&
               "You have not added any products in this factory, yet. You can add one by clicking on the Add a product button."}
