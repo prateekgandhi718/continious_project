@@ -39,15 +39,14 @@ const FactoryState = (props) => {
     }
 
     //Add a product in a particular factory
-    const addProduct = async (factoryId, title, quantity) => {
-        const response = await fetch (`${host}/api/factories/${factoryId}`, {
+    const addProduct = async (factory, title, quantity) => {
+        const response = await fetch (`${host}/api/factories/${factory}`, {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json',
             },
-            body: JSON.stringify({factoryId, title, quantity})
+            body: JSON.stringify({factory, title, quantity})
         });
-
         //It return the new object created. therefore add it on the client side as well.
         const newProd = await response.json();
         setProducts(products.concat(newProd));

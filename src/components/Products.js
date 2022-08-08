@@ -7,8 +7,11 @@ import { useEffect } from "react";
 
 const Products = () => {
   const context = useContext(factoryContext);
-  const { products } = context;
+  const { products, getProducts } = context;
 
+  useEffect(() => {
+    getProducts(localStorage.getItem('currentFactory'))
+  }, []);
 
 
   return (

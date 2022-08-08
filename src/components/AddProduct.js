@@ -7,7 +7,7 @@ import { useRef, useState } from 'react';
 const AddProduct = () => {
     const context = useContext(factoryContext);
     const { addProduct } = context;
-    const [product, setProduct] = useState({factory: -1, title: "", quantity: -1});
+    const [product, setProduct] = useState({factory: parseInt(localStorage.getItem('currentFactory')), title: "", quantity: 0});
 
     const ref = useRef(null)
     const refClose = useRef(null)
@@ -22,7 +22,7 @@ const AddProduct = () => {
     }
 
     const handleSubmit = () => {
-        addProduct(product.factory, product.title, product.quantity)
+        addProduct(parseInt(product.factory), product.title, parseInt(product.quantity))
         refClose.current.click()
     }
 
@@ -45,16 +45,16 @@ const AddProduct = () => {
                         <div className="modal-body">
                             {/* Here the form will come again  */}
                             <form>
-                    <div className="mb-3">
+                    {/* <div className="mb-3">
                         <label htmlFor="title" className="form-label">Factory</label>
                         <div id="emailHelp" className="form-text" style = {{marginTop: "-10px"}}>(Choose the factory number)</div>
                         <input type="number" className="form-control" id="factory" name="factory" aria-describedby="emailHelp" onChange = {onChange} value={product.factory} required />
                         
-                    </div>
+                    </div> */}
                     <div className="mb-3">
                         <label htmlFor="description" className="form-label">Title</label>
-                        <div id="emailHelp" className="form-text" style = {{marginTop: "-10px"}}>(Minimum length is 5)</div>
-                        <input type="text" className="form-control" id="title" name="title" onChange = {onChange} value={product.description} minLength= {5} required />
+                        <div id="emailHelp" className="form-text" style = {{marginTop: "-10px"}}>(Minimum length is 2)</div>
+                        <input type="text" className="form-control" id="title" name="title" onChange = {onChange} value={product.title} minLength= {2} required />
                     </div>
 
                     <div className="mb-3">
@@ -67,7 +67,7 @@ const AddProduct = () => {
                         </div>
                         <div className="modal-footer">
                             <button ref = {refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button disabled={product.title.length<5 || product.quantity < 0} type="submit" className="btn btn-primary" style={{backgroundColor: "black"}} onClick = {handleSubmit}>ADD!</button>
+                            <button disabled={product.title.length<2 || product.quantity < 1} type="submit" className="btn btn-primary" style={{backgroundColor: "black"}} onClick = {handleSubmit}>ADD!</button>
                         </div>
                     </div>
                 </div>
