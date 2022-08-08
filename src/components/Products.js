@@ -14,6 +14,8 @@ const Products = () => {
   }, []);
 
 
+  //Logic to edit a product. Since it is specific to an item therefore make a function and pass it as prop to the ProductionItem.
+  
   return (
     <>
     <AddProduct/>
