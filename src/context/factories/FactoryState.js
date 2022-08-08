@@ -53,16 +53,16 @@ const FactoryState = (props) => {
     }
 
     //Delete a product from a particular factory
-    const deleteProduct = async (factoryId, id) => {
-        // will provide both the arguments from the trash icon. props.prodprop.factory, props.prodprop.id
-        const response = await fetch(`${host}/api/factories/${factoryId}/${id}`, {
+    const deleteProduct = async (id, factory) => {
+        // will provide both the arguments from the trash icon. props.prodprop.id, props.prodprop.factory
+        const response = await fetch(`${host}/api/factories/${factory}/${id}`, {
             method : 'DELETE',
             headers : {
                 'Content-Type' : 'application/json',
             },
         });
-        const jsonData = await response.json();
-        console.log(jsonData);
+        // const jsonData = await response.json();
+        // console.log(jsonData);
 
         //logic for client side.
         const newProducts = products.filter((elemOfProd) => {return elemOfProd.id !== id})

@@ -32,6 +32,9 @@ const Products = () => {
     editProduct(product.id, product.factory, product.title, product.quantity)
     refCloseEdit.current.click()
   }
+
+
+  //Logic to delete a product. Since it is specific to a product and it's a simple delete function therefore use it in productItem directly.
   
   return (
     <>

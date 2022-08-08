@@ -24,6 +24,8 @@ const AddProduct = () => {
     const handleSubmit = () => {
         addProduct(parseInt(product.factory), product.title, parseInt(product.quantity))
         refClose.current.click()
+        //When you click add, the fields should be blank again therefore,
+        setProduct({factory: parseInt(localStorage.getItem('currentFactory')), title: "", quantity: 0})
     }
 
     
