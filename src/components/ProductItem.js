@@ -14,7 +14,7 @@ const ProductItem = (props) => {
                 <h5 className="card-title">{props.productProp.title}</h5>
                 <p className="card-text">{props.productProp.quantity}</p>
                 <i className="fas fa-trash mx-2" style = {{cursor: "pointer"}}></i>
-                <i className="far fa-edit mx-2" style = {{cursor: "pointer"}} ></i>
+                <i className="far fa-edit mx-2" style = {{cursor: "pointer"}} onClick = {() => {props.updateProductProp(props.productProp)}}></i>
             </div>
         </div>
     </div>

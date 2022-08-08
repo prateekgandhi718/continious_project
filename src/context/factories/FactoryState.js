@@ -70,14 +70,14 @@ const FactoryState = (props) => {
     }
 
     //Edit a product
-    const editProduct = async (id, factoryId, title, quantity) => {
+    const editProduct = async (id, factory, title, quantity) => {
         // will provide all the arguments with passing the updateNote function which takes an instance of product
-        const response = await fetch(`${host}/api/factories/${factoryId}/${id}`, {
+        const response = await fetch(`${host}/api/factories/${factory}/${id}`, {
             method : 'PUT',
             headers : {
                 'Content-Type' : 'application/json',
             },
-            body: JSON.stringify({factoryId, title, quantity})
+            body: JSON.stringify({factory, title, quantity})
         });
         const jsonData = await response.json();
 
@@ -86,7 +86,7 @@ const FactoryState = (props) => {
         for (let index = 0; index < newProducts.length; index++) {
             const element = newProducts[index];
             if (element.id === id) {
-                newProducts[index].factory = factoryId;
+                newProducts[index].factory = factory;
                 newProducts[index].title = title;
                 newProducts[index].quantity = quantity;
                 break;
