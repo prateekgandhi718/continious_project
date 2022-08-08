@@ -7,7 +7,7 @@ import { useRef, useState } from 'react';
 const AddProduct = () => {
     const context = useContext(factoryContext);
     const { addProduct } = context;
-    const [product, setProduct] = useState({factory: parseInt(localStorage.getItem('currentFactory')), title: "", quantity: 0});
+    const [product, setProduct] = useState({factory: JSON.parse(localStorage.getItem('currentFactory')).id, title: "", quantity: 0});
 
     const ref = useRef(null)
     const refClose = useRef(null)
@@ -22,10 +22,10 @@ const AddProduct = () => {
     }
 
     const handleSubmit = () => {
-        addProduct(parseInt(product.factory), product.title, parseInt(product.quantity))
+        addProduct(product.factory, product.title, parseInt(product.quantity))
         refClose.current.click()
         //When you click add, the fields should be blank again therefore,
-        setProduct({factory: parseInt(localStorage.getItem('currentFactory')), title: "", quantity: 0})
+        setProduct({factory: JSON.parse(localStorage.getItem('currentFactory')).id, title: "", quantity: 0})
     }
 
     
