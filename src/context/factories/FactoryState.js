@@ -40,13 +40,13 @@ const FactoryState = (props) => {
     }
 
     //Add a product in a particular factory
-    const addProduct = async (factory, title, quantity) => {
+    const addProduct = async (factory, title, quantity, description) => {
         const response = await fetch (`${host}/api/factories/${factory}`, {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json',
             },
-            body: JSON.stringify({factory, title, quantity})
+            body: JSON.stringify({factory, title, quantity, description})
         });
         //It return the new object created. therefore add it on the client side as well.
         const newProd = await response.json();
@@ -71,14 +71,14 @@ const FactoryState = (props) => {
     }
 
     //Edit a product
-    const editProduct = async (id, factory, title, quantity) => {
+    const editProduct = async (id, factory, title, quantity, description) => {
         // will provide all the arguments with passing the updateNote function which takes an instance of product
         const response = await fetch(`${host}/api/factories/${factory}/${id}`, {
             method : 'PUT',
             headers : {
                 'Content-Type' : 'application/json',
             },
-            body: JSON.stringify({factory, title, quantity})
+            body: JSON.stringify({factory, title, quantity, description})
         });
         const jsonData = await response.json();
 
@@ -90,6 +90,7 @@ const FactoryState = (props) => {
                 newProducts[index].factory = factory;
                 newProducts[index].title = title;
                 newProducts[index].quantity = quantity;
+                newProducts[index].description = description;
                 break;
             }
         }
@@ -105,7 +106,7 @@ const FactoryState = (props) => {
         });
         const jsonData = await response.json();
         setSingleProduct(jsonData);
-        console.log(singleProduct);
+        // console.log(singleProduct);
     }
 
 

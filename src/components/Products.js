@@ -18,10 +18,10 @@ const Products = () => {
   const refEdit = useRef(null)
   const refCloseEdit = useRef(null)
   
-  const [product, setProduct] = useState({id: "", factory: "", title: "", quantity: 0});
+  const [product, setProduct] = useState({id: "", factory: "", title: "", quantity: 0, description: ""});
   const updateProduct = (element) => {
     refEdit.current.click() //opening up the modal when clicked on the edit button
-    setProduct({id: element.id, factory: element.factory, title: element.title, quantity: element.quantity}) //putting the values of the clicked product in the product that we have created. we will edit this.
+    setProduct({id: element.id, factory: element.factory, title: element.title, quantity: element.quantity, description: element.description}) //putting the values of the clicked product in the product that we have created. we will edit this.
   }
 
   const onChange = (e) => {
@@ -29,7 +29,7 @@ const Products = () => {
   }
 
   const handleSubmit = () => {
-    editProduct(product.id, product.factory, product.title, product.quantity)
+    editProduct(product.id, product.factory, product.title, product.quantity, product.description)
     refCloseEdit.current.click()
   }
 
@@ -67,6 +67,11 @@ const Products = () => {
                         <input type="number" className="form-control" id="quantity" name="quantity" onChange = {onChange} value = {product.quantity}/>
                     </div>
 
+                            <div className="mb-3">
+                        <label htmlFor="description" className="form-label">Description</label>
+                        <div id="emailHelp" className="form-text" style = {{marginTop: "-10px"}}>(can be empty)</div>
+                        <input type="text" className="form-control" id="description" name="description" onChange = {onChange} value={product.description}/>
+                    </div>
                             </form>
                             </div>
                         <div className="modal-footer">

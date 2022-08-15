@@ -7,7 +7,7 @@ import { useRef, useState } from 'react';
 const AddProduct = () => {
     const context = useContext(factoryContext);
     const { addProduct } = context;
-    const [product, setProduct] = useState({factory: JSON.parse(localStorage.getItem('currentFactory')).id, title: "", quantity: 0});
+    const [product, setProduct] = useState({factory: JSON.parse(localStorage.getItem('currentFactory')).id, title: "", quantity: 0, description: ""});
 
     const ref = useRef(null)
     const refClose = useRef(null)
@@ -22,10 +22,10 @@ const AddProduct = () => {
     }
 
     const handleSubmit = () => {
-        addProduct(product.factory, product.title, parseInt(product.quantity))
+        addProduct(product.factory, product.title, parseInt(product.quantity), product.description)
         refClose.current.click()
         //When you click add, the fields should be blank again therefore,
-        setProduct({factory: JSON.parse(localStorage.getItem('currentFactory')).id, title: "", quantity: 0})
+        setProduct({factory: JSON.parse(localStorage.getItem('currentFactory')).id, title: "", quantity: 0, description: ""})
     }
 
     
@@ -64,6 +64,11 @@ const AddProduct = () => {
                         <input type="number" className="form-control" id="quantity" name="quantity" onChange = {onChange} value = {product.quantity}/>
                     </div>
                     
+                    <div className="mb-3">
+                        <label htmlFor="description" className="form-label">Description</label>
+                        <div id="emailHelp" className="form-text" style = {{marginTop: "-10px"}}>(can be left empty)</div>
+                        <input type="text" className="form-control" id="description" name="description" onChange = {onChange} value={product.description}/>
+                    </div>
                     
                 </form>
                         </div>
