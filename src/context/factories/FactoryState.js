@@ -8,6 +8,7 @@ const FactoryState = (props) => {
     const productsInitial = [];
     const [factories, setFactories] = useState(factoriesInitial)
     const [products, setProducts] = useState(productsInitial)
+    const [singleProduct, setSingleProduct] = useState(null);
 
     //Get all the factories.
     const getFactories = async () => {
@@ -95,10 +96,21 @@ const FactoryState = (props) => {
         setProducts(newProducts);
     }
 
+    const getASingleProduct = async (id, factory) => {
+        const response = await fetch(`${host}/api/factories/${factory}/${id}`, {
+            method: 'GET',
+            headers : {
+                'Content-Type' : 'application/json',
+            },
+        });
+        const jsonData = await response.json();
+        setSingleProduct(jsonData);
+        console.log(singleProduct);
+    }
 
 
   return (
-    <factoryContext.Provider value={{factories, products, getFactories, getProducts, editProduct, deleteProduct, addProduct}}>
+    <factoryContext.Provider value={{factories, products, getFactories, getProducts, editProduct, deleteProduct, addProduct, getASingleProduct, singleProduct}}>
         {props.children}
     </factoryContext.Provider>
   )
