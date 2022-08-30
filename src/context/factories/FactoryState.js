@@ -1,5 +1,6 @@
 import factoryContext from "./factoryContext";
 import { useState } from "react";
+import axios from 'axios';
 
 
 const FactoryState = (props) => {
@@ -40,17 +41,29 @@ const FactoryState = (props) => {
     }
 
     //Add a product in a particular factory
-    const addProduct = async (factory, title, quantity, description) => {
-        const response = await fetch (`${host}/api/factories/${factory}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json',
-            },
-            body: JSON.stringify({factory, title, quantity, description})
-        });
+    const addProduct = async (factory, title, quantity, description, image) => {
+        const config = {
+            headers: {'Content-Type': 'multipart/form-data'},
+        }
+        let formData = new FormData();
+        formData.append("factory", factory);
+        formData.append("title", title);
+        formData.append("quantity",quantity);
+        formData.append("description", description);
+        formData.append("image", image);
+
+        axios.post(`${host}/api/factories/${factory}`, formData, config)
+            .then((res) => {
+                console.log(res.data);
+                const newProd = res.data;
+                setProducts(products.concat(newProd));
+            })
+            .catch((err) => {
+                console.log(err);
+            })
         //It return the new object created. therefore add it on the client side as well.
-        const newProd = await response.json();
-        setProducts(products.concat(newProd));
+        // const newProd = await response.json();
+        // setProducts(products.concat(newProd));
     }
 
     //Delete a product from a particular factory

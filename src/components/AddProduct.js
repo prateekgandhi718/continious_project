@@ -8,6 +8,7 @@ const AddProduct = () => {
     const context = useContext(factoryContext);
     const { addProduct } = context;
     const [product, setProduct] = useState({factory: JSON.parse(localStorage.getItem('currentFactory')).id, title: "", quantity: 0, description: ""});
+    const [image, setImage] = useState(null);
 
     const ref = useRef(null)
     const refClose = useRef(null)
@@ -18,14 +19,21 @@ const AddProduct = () => {
     }
 
     const onChange = (e) => {
-        setProduct({...product, [e.target.name]: e.target.value})
+        if ([e.target.name] == 'image') {
+            setImage({imageDataType: e.target.files});
+            console.log(e.target.files)
+        } else {
+            setProduct({...product, [e.target.name]: e.target.value})
+        }
     }
 
     const handleSubmit = () => {
-        addProduct(product.factory, product.title, parseInt(product.quantity), product.description)
+        addProduct(product.factory, product.title, parseInt(product.quantity), product.description, image.imageDataType[0])
+        console.log(image.imageDataType)
         refClose.current.click()
         //When you click add, the fields should be blank again therefore,
         setProduct({factory: JSON.parse(localStorage.getItem('currentFactory')).id, title: "", quantity: 0, description: ""})
+        setImage(null);
     }
 
     
@@ -47,12 +55,7 @@ const AddProduct = () => {
                         <div className="modal-body">
                             {/* Here the form will come again  */}
                             <form>
-                    {/* <div className="mb-3">
-                        <label htmlFor="title" className="form-label">Factory</label>
-                        <div id="emailHelp" className="form-text" style = {{marginTop: "-10px"}}>(Choose the factory number)</div>
-                        <input type="number" className="form-control" id="factory" name="factory" aria-describedby="emailHelp" onChange = {onChange} value={product.factory} required />
-                        
-                    </div> */}
+                    
                     <div className="mb-3">
                         <label htmlFor="description" className="form-label">Title</label>
                         <div id="emailHelp" className="form-text" style = {{marginTop: "-10px"}}>(Minimum length is 2)</div>
@@ -69,6 +72,12 @@ const AddProduct = () => {
                         <div id="emailHelp" className="form-text" style = {{marginTop: "-10px"}}>(can be left empty)</div>
                         <input type="text" className="form-control" id="description" name="description" onChange = {onChange} value={product.description}/>
                     </div>
+
+                    <div className="mb-3">
+                        <label htmlfor="post-image" className="form-label" >Image</label>
+                        <input type="file" accept='image/*' className="form-control" id="post-image" name='image' onChange={onChange} />
+                    </div>
+                    
                     
                 </form>
                         </div>

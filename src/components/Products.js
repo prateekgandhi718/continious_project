@@ -84,12 +84,6 @@ const Products = () => {
 
 
 
-
-
-
-
-
-
       <div className="mx-3">
         <div className="row my-3">
           <h2>List of products in factory: {JSON.parse(localStorage.getItem('currentFactory')).factory_name}, {JSON.parse(localStorage.getItem('currentFactory')).factory_location}</h2>
