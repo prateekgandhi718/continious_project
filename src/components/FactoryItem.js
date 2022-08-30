@@ -22,3 +22,5 @@ const FactoryItem = (props) => {
 }
 
 export default FactoryItem
+
+//Need not use local storage. can use local state variables with if conditions. as done for products.
