@@ -4,7 +4,7 @@ import factoryContext from "../context/factories/factoryContext";
 import { useRef, useState } from 'react';
 
 
-const AddProduct = () => {
+const AddProduct = (props) => {
     const context = useContext(factoryContext);
     const { addProduct } = context;
     const [product, setProduct] = useState({factory: JSON.parse(localStorage.getItem('currentFactory')).id, title: "", quantity: 0, description: ""});
@@ -34,6 +34,7 @@ const AddProduct = () => {
         //When you click add, the fields should be blank again therefore,
         setProduct({factory: JSON.parse(localStorage.getItem('currentFactory')).id, title: "", quantity: 0, description: ""})
         setImage(null);
+        props.showAlertProp("The note has been added successfully", "success")
     }
 
     

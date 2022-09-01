@@ -24,7 +24,7 @@ const ProductItem = (props) => {
                 </Link>
                 <div className='d-flex justify-content-between my-2 '>
                   <i className="far fa-edit" style = {{cursor: "pointer"}} onClick = {() => {props.updateProductProp(props.productProp)}}></i>
-                  <i className="fas fa-trash" style = {{cursor: "pointer"}} onClick = {() => {deleteProduct(props.productProp.id, props.productProp.factory)}}></i>
+                  <i className="fas fa-trash" style = {{cursor: "pointer"}} onClick = {() => {deleteProduct(props.productProp.id, props.productProp.factory); props.showAlertProp("Deleted successfully.", "warning")}}></i>
                 </div>
             </div>
         </div>

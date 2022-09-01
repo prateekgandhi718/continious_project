@@ -5,7 +5,7 @@ import AddProduct from "./AddProduct";
 import ProductItem from "./ProductItem";
 import { useEffect, useRef, useState } from "react";
 
-const Products = () => {
+const Products = (props) => {
   const context = useContext(factoryContext);
   const { products, getProducts, editProduct } = context;
 
@@ -40,6 +40,7 @@ const Products = () => {
   const handleSubmit = () => {
     editProduct(product.id, product.factory, product.title, product.quantity, product.description, image.imageDataType)
     refCloseEdit.current.click()
+    props.showAlertProp("The note has been updated.", "success")
   }
 
   //Possible bug: when you are uploading then the payload is a file. when you are not uploading a fresh image, the payload is just the URL of the image uploaded in the backend.
@@ -50,7 +51,7 @@ const Products = () => {
   
   return (
     <>
-    <AddProduct/>
+    <AddProduct showAlertProp = {props.showAlertProp}/>
 
     {/* Putting the modal related to editing */}
     <button ref={refEdit} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModalEdit">
@@ -110,7 +111,7 @@ const Products = () => {
               "You have not added any products in this factory, yet. You can add one by clicking on the Add a product button."}
           </div>
           {products.map((element) => {
-            return <ProductItem key={element.id} productProp={element} updateProductProp = {updateProduct} />;
+            return <ProductItem key={element.id} productProp={element} updateProductProp = {updateProduct} showAlertProp = {props.showAlertProp}/>;
           })}
         </div>
       </div>
