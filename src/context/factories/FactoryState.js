@@ -10,6 +10,7 @@ const FactoryState = (props) => {
     const [factories, setFactories] = useState(factoriesInitial)
     const [products, setProducts] = useState(productsInitial)
     const [singleProduct, setSingleProduct] = useState(null);
+    const [newImagePath, setNewImagePath] = useState("");
 
     //Get all the factories.
     const getFactories = async () => {
@@ -99,6 +100,7 @@ const FactoryState = (props) => {
         axios.put(`${host}/api/factories/${factory}/${id}`, formData, config)
             .then((res) => {
                 console.log(res.data);
+                setNewImagePath(res.data.image);
             })
             .catch((err) => {
                 console.log(err);
@@ -113,7 +115,7 @@ const FactoryState = (props) => {
                 newProducts[index].title = title;
                 newProducts[index].quantity = quantity;
                 newProducts[index].description = description;
-                newProducts[index].image = image;
+                newProducts[index].image = `${host}`.concat(newImagePath); //now newProducts[index].image is the backend URL and image is the image file from front end.
                 break;
             }
         }

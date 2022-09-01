@@ -15,9 +15,9 @@ const ProductItem = (props) => {
     <div className="col-md-3">
         <div className="card border-info my-3">
             <div className="card-body text-dark" >
-              <Link to="/products/product" style={{textDecoration: "none", cursor: "pointer"}} onClick = {() => {getASingleProduct(props.productProp.id, props.productProp.factory)}}>
-            <img className="card-img-top" src={`${host}${props.productProp.image}`} alt="Card image cap"/>
-              </Link>
+              {/* <Link to="/products/product" style={{textDecoration: "none", cursor: "pointer"}} onClick = {() => {getASingleProduct(props.productProp.id, props.productProp.factory)}}>
+            <img className="card-img-top" style={{height: '10rem'}} src={`${host}${props.productProp.image}`} alt="Card image cap"/>
+              </Link> */}
                 <Link className='d-flex justify-content-between my-2' to="/products/product" style={{textDecoration: "none", cursor: "pointer"}} onClick = {() => {getASingleProduct(props.productProp.id, props.productProp.factory)}}>
                 <h5 className="card-title" style={{color: "#22aba4"}}>{props.productProp.title}</h5>
                 <p className="card-text" style={{color: "#198a84"}}>{props.productProp.quantity}</p>

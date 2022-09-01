@@ -25,7 +25,7 @@ const Products = (props) => {
     refEdit.current.click() //opening up the modal when clicked on the edit button
     setProduct({id: element.id, factory: element.factory, title: element.title, quantity: element.quantity, description: element.description}) //putting the values of the clicked product in the product that we have created. we will edit this.
     // setImage({imageDataType: element.image})
-    console.log(element.image)
+    // console.log(element.image)
   }
 
   const onChange = (e) => {
