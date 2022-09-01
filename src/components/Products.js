@@ -42,6 +42,8 @@ const Products = () => {
     refCloseEdit.current.click()
   }
 
+  //Possible bug: when you are uploading then the payload is a file. when you are not uploading a fresh image, the payload is just the URL of the image uploaded in the backend.
+
 
   //Logic to delete a product. Since it is specific to a product and it's a simple delete function therefore use it in productItem directly.
   
@@ -83,7 +85,7 @@ const Products = () => {
                     </div>
 
                     <div className="mb-3">
-                        <label htmlfor="post-image" className="form-label" >Image ({image.imageDataType !== '/media/posts/default.jpg' ? 'We have your uploaded image' : 'You have not uploaded any picture.'})</label>
+                        <label htmlfor="post-image" className="form-label" >Image</label>
                         <input type="file" accept='image/*' className="form-control" id="post-image" name='image' onChange={onChange} />
                     </div>
 

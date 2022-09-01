@@ -84,16 +84,25 @@ const FactoryState = (props) => {
     }
 
     //Edit a product
-    const editProduct = async (id, factory, title, quantity, description) => {
+    const editProduct = async (id, factory, title, quantity, description, image) => {
         // will provide all the arguments with passing the updateNote function which takes an instance of product
-        const response = await fetch(`${host}/api/factories/${factory}/${id}`, {
-            method : 'PUT',
-            headers : {
-                'Content-Type' : 'application/json',
-            },
-            body: JSON.stringify({factory, title, quantity, description})
-        });
-        const jsonData = await response.json();
+        const config = {
+            headers: {'Content-Type': 'multipart/form-data'},
+        }
+        let formData = new FormData();
+        formData.append("factory", factory);
+        formData.append("title", title);
+        formData.append("quantity",quantity);
+        formData.append("description", description);
+        formData.append("image", image);
+
+        axios.put(`${host}/api/factories/${factory}/${id}`, formData, config)
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
 
         //logic to edit on client side.
         let newProducts = JSON.parse(JSON.stringify(products));
@@ -104,6 +113,7 @@ const FactoryState = (props) => {
                 newProducts[index].title = title;
                 newProducts[index].quantity = quantity;
                 newProducts[index].description = description;
+                newProducts[index].image = image;
                 break;
             }
         }
