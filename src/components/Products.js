@@ -43,7 +43,8 @@ const Products = () => {
   }
 
   //Possible bug: when you are uploading then the payload is a file. when you are not uploading a fresh image, the payload is just the URL of the image uploaded in the backend.
-
+  // Possible fix: when you are uploading, then run the normal editProduct function. When you are not, then run a modified edit function which would not touch the image.
+  
 
   //Logic to delete a product. Since it is specific to a product and it's a simple delete function therefore use it in productItem directly.
   
