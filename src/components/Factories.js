@@ -16,7 +16,7 @@ const Factories = () => {
   return (
     <div className='mx-3'>
       <div className='row my-3'>
-        <h2>Factories.</h2>
+        <h1 className='display-6'>Factories.</h1>
         <div className='container'>
             {factories.length === 0 && 'You have not added any factories yet. Go to django admin.'}
         </div>

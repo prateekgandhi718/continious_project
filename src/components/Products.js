@@ -24,7 +24,7 @@ const Products = () => {
   const updateProduct = (element) => {
     refEdit.current.click() //opening up the modal when clicked on the edit button
     setProduct({id: element.id, factory: element.factory, title: element.title, quantity: element.quantity, description: element.description}) //putting the values of the clicked product in the product that we have created. we will edit this.
-    setImage({imageDataType: element.image})
+    // setImage({imageDataType: element.image})
     console.log(element.image)
   }
 
@@ -44,7 +44,7 @@ const Products = () => {
 
   //Possible bug: when you are uploading then the payload is a file. when you are not uploading a fresh image, the payload is just the URL of the image uploaded in the backend.
   // Possible fix: when you are uploading, then run the normal editProduct function. When you are not, then run a modified edit function which would not touch the image.
-  
+
 
   //Logic to delete a product. Since it is specific to a product and it's a simple delete function therefore use it in productItem directly.
   
@@ -104,7 +104,7 @@ const Products = () => {
 
       <div className="mx-3">
         <div className="row my-3">
-          <h2>List of products in factory: {JSON.parse(localStorage.getItem('currentFactory')).factory_name}, {JSON.parse(localStorage.getItem('currentFactory')).factory_location}</h2>
+          <h1 className="display-6"><mark>{JSON.parse(localStorage.getItem('currentFactory')).factory_name}, <em>{JSON.parse(localStorage.getItem('currentFactory')).factory_location}</em></mark></h1>
           <div className="container">
             {products.length === 0 &&
               "You have not added any products in this factory, yet. You can add one by clicking on the Add a product button."}

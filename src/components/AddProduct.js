@@ -39,10 +39,12 @@ const AddProduct = () => {
     
   return (
     <>
-    
-        <button ref={ref} type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={addProductFunction}>
-                Add a product.
-        </button>
+        <div className='d-flex justify-content-center my-3'>
+            <button ref={ref} type="button" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={addProductFunction}>
+                    + Add a product
+            </button>
+
+        </div>
 
 
             <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
