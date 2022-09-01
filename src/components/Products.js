@@ -19,17 +19,26 @@ const Products = () => {
   const refCloseEdit = useRef(null)
   
   const [product, setProduct] = useState({id: "", factory: "", title: "", quantity: 0, description: ""});
+  const [image, setImage] = useState(null);
+
   const updateProduct = (element) => {
     refEdit.current.click() //opening up the modal when clicked on the edit button
     setProduct({id: element.id, factory: element.factory, title: element.title, quantity: element.quantity, description: element.description}) //putting the values of the clicked product in the product that we have created. we will edit this.
+    setImage({imageDataType: element.image})
+    console.log(element.image)
   }
 
   const onChange = (e) => {
-    setProduct({...product, [e.target.name]: e.target.value})
+    if ([e.target.name] == 'image') {
+      setImage({imageDataType: e.target.files[0]});
+      console.log(e.target.files[0])
+  } else {
+      setProduct({...product, [e.target.name]: e.target.value})
+  }
   }
 
   const handleSubmit = () => {
-    editProduct(product.id, product.factory, product.title, product.quantity, product.description)
+    editProduct(product.id, product.factory, product.title, product.quantity, product.description, image.imageDataType)
     refCloseEdit.current.click()
   }
 
@@ -72,6 +81,12 @@ const Products = () => {
                         <div id="emailHelp" className="form-text" style = {{marginTop: "-10px"}}>(can be empty)</div>
                         <input type="text" className="form-control" id="description" name="description" onChange = {onChange} value={product.description}/>
                     </div>
+
+                    <div className="mb-3">
+                        <label htmlfor="post-image" className="form-label" >Image ({image.imageDataType !== '/media/posts/default.jpg' ? 'We have your uploaded image' : 'You have not uploaded any picture.'})</label>
+                        <input type="file" accept='image/*' className="form-control" id="post-image" name='image' onChange={onChange} />
+                    </div>
+
                             </form>
                             </div>
                         <div className="modal-footer">
