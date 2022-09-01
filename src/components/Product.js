@@ -36,7 +36,7 @@ const Product = () => {
               className="img-fluid"
               style={{ width: "20rem", marginBottom: "1.5rem", borderRadius: "2rem" }}
             />
-            <button type="button" class="btn btn-dark" onClick={downloadImage}>
+            <button type="button" className="btn btn-dark" onClick={downloadImage}>
               Download the image.
             </button>
           </div>
