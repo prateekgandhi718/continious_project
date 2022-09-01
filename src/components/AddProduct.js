@@ -77,7 +77,7 @@ const AddProduct = () => {
 
                     <div className="mb-3">
                         <label htmlfor="post-image" className="form-label" >Image</label>
-                        <input type="file" accept='image/*' className="form-control" id="post-image" name='image' onChange={onChange} />
+                        <input type="file" accept='image/*' className="form-control" id="post-image" name='image' onChange={onChange} required/>
                     </div>
                     
                     
@@ -85,7 +85,7 @@ const AddProduct = () => {
                         </div>
                         <div className="modal-footer">
                             <button ref = {refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button disabled={product.title.length<2 || product.quantity < 1} type="submit" className="btn btn-primary" style={{backgroundColor: "black"}} onClick = {handleSubmit}>ADD!</button>
+                            <button disabled={product.title.length<2 || product.quantity < 1 || image === null} type="submit" className="btn btn-primary" style={{backgroundColor: "black"}} onClick = {handleSubmit}>ADD!</button>
                         </div>
                     </div>
                 </div>

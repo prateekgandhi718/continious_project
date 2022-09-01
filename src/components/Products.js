@@ -94,7 +94,7 @@ const Products = () => {
                             </div>
                         <div className="modal-footer">
                             <button ref = {refCloseEdit} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button disabled={product.title.length<2 || product.quantity < 1} type="submit" className="btn btn-primary" style={{backgroundColor: "black"}} onClick = {handleSubmit}>Edit!</button>
+                            <button disabled={product.title.length<2 || product.quantity < 1 || image === null} type="submit" className="btn btn-primary" style={{backgroundColor: "black"}} onClick = {handleSubmit}>Edit!</button>
                         </div>
                     </div>
                 </div>
